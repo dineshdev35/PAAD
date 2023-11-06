@@ -1,0 +1,511 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head align="center">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Recruitment Data Visualization</title>
+    <style>
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 170px;
+        }
+        .chart-box {
+            width: 500px;
+        }
+        .item-center{
+            margin: 0 auto;
+        }
+        .line-chart-box,
+        .polar-area-chart-box {
+            width: 100%;
+            text-align: center;
+        }
+        pre {
+            font-family: Arial, sans-serif; /* or any other font you like */
+            font-size: 1.5em;
+           }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+
+<body style="min-height: max-content;padding: auto">
+    <div class="container-fluid m-2">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="http://127.0.0.1:8000/#" class="btn btn-primary">
+                    <i class='bx bx-home'></i> Home
+                </a>
+            </div>
+        </div>
+    </div>
+    <h1>Recruitment Data Visualization</h1>
+
+    <!-- First Set of Charts for Technologies 1-8 -->
+    <p><pre>                         Technologies 1-8                                                                             Companies 1-13</pre></p>
+    <div class="chart-container">
+        <div class="chart-box">
+            <canvas id="pieChart1" width="200" height="200"></canvas>
+        </div>
+        <div class="chart-box">
+            <canvas id="barGraph1" width="200" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Second Set of Charts for Technologies 9-15 -->
+    <p><pre>                         Technologies 9-15                                                                             Companies 14-27</pre></p>
+    <div class="chart-container">
+        <div class="chart-box">
+            <canvas id="pieChart2" width="200" height="200"></canvas>
+        </div>
+        <div class="chart-box">
+            <canvas id="barGraph2" width="200" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Stacked Line Chart for Recruitment Data Comparison (2019 vs 2020) -->
+    <h2 align="center">Recruitment Data Comparison (2019 vs 2020)</h2>
+    <div class="line-chart-box">
+        <canvas id="stackedLineChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Polar Area Chart for Salary and No. of Students -->
+    <h2 align="center">Salary and No. of Students</h2>
+    <div class="polar-area-chart-box">
+        <canvas id="polarAreaChart" width="200" height="200" style="width: 200px; height: 200px;"></canvas>
+    </div>
+    <div style="position: fixed; bottom: 10px; left: 10px; color: #FFF; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        <button class="btn btn-primary" onclick="toggleSuggestion()">Suggestion</button>
+    </div>
+    <div id="suggestionBox" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 800px; max-height: 80vh; width: 90%; height: 70%; background-color: rgb(192, 93, 188); color: #000; padding: 20px; border: 1px solid #CCC; border-radius: 10px; text-align: left; overflow-y: auto;">
+        <p>
+            To get placed in software companies, you need to have a combination of technical and soft skills. Here are
+            some software companies and the skills that are required to get placed in them according to job roles:
+        </p>
+        <ol>
+            <li>Microsoft:
+                <ul>
+                    <li>Software Engineer: C#, .NET, Azure, SQL Server, Windows OS.</li>
+                    <li>Product Manager: Product management, Agile methodology, Communication.</li>
+                    <li>Data Scientist: Data analysis, Machine learning, Python.</li>
+                </ul>
+            </li>
+            <li>Amazon:
+                <ul>
+                    <li>Software Development Engineer: Java, Python, AWS.</li>
+                    <li>Business Analyst: Data analysis, SQL, Excel.</li>
+                    <li>Technical Program Manager: Project management, Agile methodology, Communication.</li>
+                </ul>
+            </li>
+            <li>Google:
+                <ul>
+                    <li>Software Engineer: Java, Python, C++, JavaScript, Android.</li>
+                    <li>Product Manager: Product management, Agile methodology, Communication.</li>
+                    <li>Data Scientist: Data analysis, Machine learning, Python.</li>
+                </ul>
+            </li>
+            <li>Facebook:
+                <ul>
+                    <li>Software Engineer: PHP, JavaScript, ReactJS.</li>
+                    <li>Product Manager: Product management, Agile methodology, Communication.</li>
+                    <li>Data Scientist: Data analysis, Machine learning, Python.</li>
+                </ul>
+            </li>
+            <li>IBM:
+                <ul>
+                    <li>Software Engineer: Java, Python, Cloud Computing.</li>
+                    <li>Product Manager: Product management, Agile methodology, Communication.</li>
+                    <li>Data Scientist: Data analysis, Machine learning, Python.</li>
+                </ul>
+            </li>
+            <li>Oracle:
+                <ul>
+                    <li>Software Engineer: Java, SQL.</li>
+                    <li>Product Manager: Product management, Agile methodology, Communication.</li>
+                    <li>Data Scientist: Data analysis, Machine learning, Python.</li>
+                </ul>
+            </li>
+            <li>Cisco:
+                <ul>
+                    <li>Network Engineer: Networking protocols and technologies such as TCP/IP and routing protocols
+                        like OSPF and BGP; Security protocols and technologies such as VPNs and firewalls; Network
+                        design and architecture; Network troubleshooting and problem-solving skills; Knowledge of
+                        programming languages such as Python or Perl.
+                    </li>
+                </ul>
+            </li>
+            <li>Intel:
+                <ul>
+                    <li>Software Engineer: C++, Python.</li>
+                </ul>
+            </li>
+            <li>Apple:
+                <ul>
+                    <li>Software Engineer: Swift, Objective-C.</li>
+                </ul>
+            </li>
+            <li>Adobe:
+                <ul>
+                    <li>Software Engineer: Java, C++, JavaScript.</li>
+                </ul>
+            </li>
+            <li>Infosys:
+                <ul>
+                    <li>Software Engineer: Java.</li>
+                </ul>
+            </li>
+            <li>TCS:
+                <ul>
+                    <li>Software Engineer: Java.</li>
+                </ul>
+            </li>
+            <li>Wipro:
+                <ul>
+                    <li>Software Engineer: Java.</li>
+                </ul>
+            </li>
+            <li>Capgemini:
+                <ul>
+                    <li>Software Engineer: Java.</li>
+                </ul>
+            </li>
+            <li>Accenture:
+                <ul>
+                    <li>Entry-level positions: Java or .NET programming languages; Basic knowledge of SQL; Good
+                        communication skills.
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <p>
+            Please note that this is not an exhaustive list and the skills required may vary depending on the job role and the
+            company’s requirements.
+        </p>
+    </div>
+    
+
+    <script>
+        // Function to parse CSV data and create charts
+        function parseCSVData(pieCsvData, barCsvData, pieChartId, barGraphId, chartTitle, lineChartData2019, lineChartData2020, polarCsvData) {
+            const pieLines = pieCsvData.trim().split('\n');
+            const pieDataList = [];
+            for (const line of pieLines) {
+                const [technology, count] = line.split('\t');
+                pieDataList.push({
+                    technology,
+                    count: parseInt(count)
+                });
+            }
+
+            // Prepare data for pie chart
+            const pieLabels = pieDataList.map(data => data.technology);
+            const pieData = pieDataList.map(data => data.count);
+
+            const barLines = barCsvData.trim().split('\n');
+            const barDataList = [];
+            for (const line of barLines) {
+                const [company, students] = line.split('\t');
+                barDataList.push({
+                    company,
+                    students: parseInt(students)
+                });
+            }
+
+            // Prepare data for bar graph
+            const barLabels = barDataList.map(data => data.company);
+            const barData = barDataList.map(data => data.students);
+
+            // Create pie chart
+            const pieChartCanvas = document.getElementById(pieChartId).getContext('2d');
+            new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: {
+                    labels: pieLabels,
+                    datasets: [{
+                        data: pieData,
+                        backgroundColor: ['red', 'blue', 'green', 'orange', 'purple', 'yellow',
+                            'pink', 'brown', 'gray', 'cyan', 'magenta', 'lime', 'teal', 'indigo', 'violet', 'maroon', 'gold',
+                            'darkred', 'darkblue', 'darkgreen', 'darkorange', 'darkpurple', 'darkyellow', 'darkpink',
+                            'darkbrown', 'darkgray', 'darkcyan', 'darkmagenta', 'darklime', 'darkteal', 'darkindigo', 'darkviolet',
+                            'darkmaroon', 'darkgold', 'lightred', 'lightblue', 'lightgreen', 'lightorange', 'lightpurple',
+                            'lightyellow', 'lightpink', 'lightbrown', 'lightgray', 'lightcyan', 'lightmagenta', 'lightlime',
+                            'lightteal', 'lightindigo', 'lightviolet', 'lightmaroon'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: chartTitle
+                    }
+                }
+            });
+
+            // Create bar graph
+            const barGraphCanvas = document.getElementById(barGraphId).getContext('2d');
+            new Chart(barGraphCanvas, {
+                type: 'bar',
+                data: {
+                    labels: barLabels,
+                    datasets: [{
+                        label: 'No.of.Students',
+                        data: barData,
+                        backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            fontColor: '#333',
+                            generateLabels: function (chart) {
+                                const data = chart.data;
+                                return data.datasets.map(function (dataset, i) {
+                                    return {
+                                        text: dataset.data + ' - ' + data.labels[i],
+                                        fillStyle: dataset.backgroundColor,
+                                        index: i
+                                    };
+                                });
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Recruitment by Company (Bar Graph)'
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            // Get the unique labels from both 2019 and 2020 datasets
+            const uniqueLabels = getUniqueLabels(lineChartData2019.labels, lineChartData2020.labels);
+
+            // Get the data values for the unique labels
+            const data2019 = getChartData(uniqueLabels, lineChartData2019.labels, lineChartData2019.data);
+            const data2020 = getChartData(uniqueLabels, lineChartData2020.labels, lineChartData2020.data);
+
+            // Create stacked line chart
+            const stackedLineChartCanvas = document.getElementById('stackedLineChart').getContext('2d');
+            new Chart(stackedLineChartCanvas, {
+                type: 'line',
+                data: {
+                    labels: uniqueLabels,
+                    datasets: [
+                        {
+                            label: '2019',
+                            data: data2019,
+                            borderColor: 'blue',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            fill: '-1'
+                        },
+                        {
+                            label: '2020',
+                            data: data2020,
+                            borderColor: 'red',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: '-1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Recruitment Data Comparison (2019 vs 2020)'
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'category',
+                            position: 'bottom',
+                            ticks: {
+                                autoSkip: false
+                            }
+                        }],
+                        yAxes: [{
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            // Parse CSV data for polar area chart
+            const polarLines = polarCsvData.trim().split('\n');
+            const polarDataList = [];
+            for (const line of polarLines) {
+                const [salary, students] = line.split('\t');
+                polarDataList.push({
+                    salary,
+                    students: parseInt(students)
+                });
+            }
+
+            // Prepare data for polar area chart
+            const polarLabels = polarDataList.map(data => data.salary);
+            const polarData = polarDataList.map(data => data.students);
+
+            // Create polar area chart
+            const polarAreaChartCanvas = document.getElementById('polarAreaChart').getContext('2d');
+            new Chart(polarAreaChartCanvas, {
+                type: 'polarArea',
+                data: {
+                    labels: polarLabels,
+                    datasets: [{
+                        data: polarData,
+                        backgroundColor: ['red', 'blue', 'green', 'orange', 'purple', 'yellow', 'pink', 'brown', 'gray', 'cyan', 'magenta', 'lime', 'teal', 'indigo', 'violet', 'maroon', 'gold', 'darkred', 'darkblue', 'darkgreen', 'darkorange', 'darkpurple', 'darkyellow', 'darkpink', 'darkbrown', 'darkgray', 'darkcyan', 'darkmagenta', 'darklime', 'darkteal', 'darkindigo', 'darkviolet', 'darkmaroon', 'darkgold', 'lightred', 'lightblue', 'lightgreen', 'lightorange', 'lightpurple', 'lightyellow', 'lightpink', 'lightbrown', 'lightgray', 'lightcyan', 'lightmagenta', 'lightlime', 'lightteal', 'lightindigo', 'lightviolet', 'lightmaroon']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Salary and No. of Students (Polar Area Chart)'
+                    }
+                }
+            });
+        }
+
+        // Function to get the unique labels from two arrays
+        function getUniqueLabels(labels1, labels2) {
+            return Array.from(new Set(labels1.concat(labels2)));
+        }
+
+        // Function to get the data values for the unique labels
+        function getChartData(uniqueLabels, labels, data) {
+            return uniqueLabels.map(label => {
+                const index = labels.indexOf(label);
+                return index === -1 ? 0 : data[index];
+            });
+        }
+
+        // Data for the first set of technologies (Technologies 1-8)
+        const csvData1 = `
+            JAVA\t49
+            FRONT-END\t60
+            R\t88
+            PYTHON\t58
+            JAVASCRIPT\t40
+            FULL-STACK\t14
+            OOPS\t17
+            SPRINGBOOT\t37
+        `;
+
+        // Data for the second set of technologies (Technologies 9-15)
+        const csvData2 = `
+            ML\t25
+            DBMS\t105
+            BACK-END\t63
+            LINUX\t31
+            AWS\t11
+            SQL\t38
+            AI\t64
+            AZURE\t3
+            NODEJS\t20
+        `;
+
+        // Provided data for the first set of companies (Companies 1-13)
+        const barCsvData1 = `
+            INFOSYS\t15
+            MPHASIS\t32
+            HEXWARE\t6
+            TCS-CODEVITA\t20
+            INFOSYS\t6
+            HCL\t26
+            TCS-NINJA\t18
+            AMAZON COMPANY\t1
+            L&T\t10
+            VIRTUSA\t2
+            WIPRO\t22
+            IBM\t7
+            WEB SYNERGIES\t2
+        `;
+
+        // Provided data for the second set of companies (Companies 14-27)
+        const barCsvData2 = `
+            SERVICE NOW\t7
+            Q-CONNECT\t4
+            SUTHERLAND\t10
+            Tech Mahindra\t11
+            EFFTRONICS\t1
+            TECH TAMMINA\t1
+            MIRACLE SOFTWARE SYSTEMS\t3
+            ACXIOM CONSULTING\t3
+            PENNANT FUTURE READY\t3
+            JUSTDIAL\t5
+            CTS\t3
+            TARGET\t1
+            BYJUS\t2
+            ATOS GLOBAL\t1
+        `;
+
+        // Recruitment data for 2019
+        const lineChartData2019 = {
+            labels: ['TCS CODEVITA', 'MPHASIS', 'L&T TECHNOLOGY SERVICES', 'TCS NINJA', 'EFFTRONICS SYSTEMS PVT. LTD.', 'PROTOTECH SOLUTIONS', 'OPSRAMP PVT. LTD.', 'SNOVASYS SOFTWARE SOLUTIONS PVT. LTD.', 'SYNTEL', 'VAYA GROUP', 'WIPRO', 'MAGNAQUEST', 'ZEN TECHNOLOGIES', 'INFOSYS', 'CADDYCODE', 'CGI', 'COGNIZANT', 'PENNANT TECHNOLOGIES', 'VIRTUSA POLARIS', 'MIRACLE SOFTWARE SYSTEMS', 'TECH MAHINDRA', 'MINDTREE', 'KARVY'],
+            data: [6, 17, 19, 14, 1, 1, 6, 1, 39, 3, 22, 2, 1, 6, 3, 4, 11, 3, 4, 1, 1, 1, 8]
+        };
+
+        // Recruitment data for 2020
+        const lineChartData2020 = {
+            labels: ['INFOSYS', 'MPHASIS', 'HEXWARE', 'HEXWARE', 'TCS-CODEVITA', 'INFOSYS', 'HCL', 'TCS-NINJA', 'AMAZON COMPANY', 'L&T', 'VIRTUSA', 'WIPRO', 'IBM', 'WEB SYNERGIES', 'SERVICE NOW', 'Q-CONNECT', 'SUTHERLAND', 'Tech Mahindra', 'EFFTRONICS', 'TECH TAMMINA', 'MIRACLE SOFTWARE SYSTEMS', 'ACXIOM CONSULTING', 'PENNANT FUTURE READY', 'JUSTDIAL', 'CTS', 'TARGET', 'BYJUS', 'ATOS GLOBAL'],
+            data: [15, 32, 6, 1, 20, 6, 26, 18, 1, 10, 2, 22, 7, 2, 7, 4, 10, 11, 1, 1, 3, 3, 3, 5, 3, 1, 2, 1]
+        };
+
+        // Data for salary and number of students
+        const polarCsvData = `
+            360000\t13
+            500000\t6
+            325000\t32
+            300000\t36
+            330000\t38
+            550000\t4
+            350000\t37
+            1800000\t1
+            400000\t11
+            280000\t2
+            2000000\t7
+            200000\t14
+            320000\t1
+            240000\t6
+            250000\t3
+            290000\t5
+            450000\t3
+            1070000\t1
+            1080000\t2
+        `;
+
+        // Call the parsing function for the first set of technologies
+        parseCSVData(csvData1, barCsvData1, 'pieChart1', 'barGraph1', 'Recruitment by Technology (Set 1)', lineChartData2019, lineChartData2020, polarCsvData);
+
+        // Call the parsing function for the second set of technologies
+        parseCSVData(csvData2, barCsvData2, 'pieChart2', 'barGraph2', 'Recruitment by Technology (Set 2)', lineChartData2019, lineChartData2020, polarCsvData);
+        function toggleSuggestion() {
+            const suggestionBox = document.getElementById('suggestionBox');
+            if (suggestionBox.style.display === 'none') {
+                suggestionBox.style.display = 'block';
+            } else {
+                suggestionBox.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

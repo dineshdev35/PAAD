@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Placement Analytics & Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        /* Add inline CSS here */
+        div.table-container {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            margin-top: 20px;
+            overflow: auto;
+        }
+        .table {
+          font-size: 11px; /* Adjust this value to your liking */
+        }
+        .nav-links {
+          padding: 8px;
+        }
+        .sidebar .logo-img {
+          display: none;
+        }
+        .sidebar.expand .logo-img {
+          display: block; /* Show the logo image when the sidebar is expanded */
+        }
+        .home {
+          position: relative; /* Change this line */
+          top: 0;
+          left: 60px;
+          right: 0;
+          min-height: 100vh;
+          background: #e2e2e200;
+          z-index: 6;
+          transition: var(--transition);
+        }
+        .sidebar.expand ~ .home {
+          left: 200px;
+          right: 0;
+        }
+        #dashboard-section {
+          background: url("{% static 'bg.jpg' %}") no-repeat center fixed;
+          background-size: cover;
+        }
+    </style>
+  </head>
+  <body>
+    <section class="sidebar pl-0 ml-0 ">
+      <div class="nav-header">
+        <p class="logo" align="center"><br></br>PAAD Data Center</p>
+        <i class="bx bx-menu-alt-right btn-menu"></i>
+      </div>
+      <ul class="nav-links">
+        <img src="{% static 'Data extraction-rafiki.svg' %}" alt="Logo" width="150" height="150" class="logo-img">
+        <li>
+          <a href="#" id="home-icon">
+            <i class="bx bx-home-alt-2"></i>
+            <span class="title">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li>
+          <a href="#" id="dashboard-icon">
+            <i class="bx bxs-dashboard"></i> <!-- Use "bx bxs-dashboard" icon for Dashboard -->
+            <span class="title">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="{% url 'report' %}" id="report-icon">
+            <i class="bx bxs-bar-chart-alt-2"></i> <!-- Use "bx bxs-bar-chart-alt" icon for Report -->
+            <span class="title">Report</span>
+          </a>
+          <span class="tooltip">Report</span>
+        </li>     
+        <li>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dineshgonnuri@gmail.com" id="contact-icon" target="_blank">
+            <i class="bx bx-envelope"></i>
+            <span class="title">Contact-us</span>
+            </a>
+            <span class="tooltip">Contact-us</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="home" id="dashboard-section" align="center" style="display:none;">
+      <i class='bx bxs-book'></i>
+      <p>Analyse & Learn</p>
+        <div class="container ml-4">
+            <h1 align="center">2016-20 Batch CSE Placements Data</h1>
+            <div class="table-container">
+            <table class="table mytable">
+                <thead>
+                    <tr>
+                        <th>SNO</th>
+                        <th>ROLLNO</th>
+                        <th>NAME</th>
+                        <th>COMPANY</th>
+                        <th>TECHNOLOGY1</th>
+                        <th>TECHNOLOGY2</th>
+                        <th>TECHNOLOGY3</th>
+                        <th>SALARY</th>
+                        <th>DATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{ item.SNO }}</td>
+                        <td>{{ item.ROLLNO }}</td>
+                        <td>{{ item.NAME }}</td>
+                        <td>{{ item.COMPANY }}</td>
+                        <td>{{ item.TECHNOLOGY1 }}</td>
+                        <td>{{ item.TECHNOLOGY2 }}</td>
+                        <td>{{ item.TECHNOLOGY3 }}</td>
+                        <td>{{ item.SALARY }}</td>
+                        <td>{{ item.DATE }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section id="home-section" data-aos="fade">
+      <h1 class="welcome-message" data-aos="zoom-in-down">Placements Analytics and Dashboard</h1>
+      <div id="studentImage" style="text-align: center;" text-align: center;" data-aos="zoom-in-down">
+        <img src="{% static 'college students-pana.svg' %}" alt="College Students" style="width: 700px; height: auto;">
+      </div>
+      <br></br>
+        <div class="container">
+            <div class="row" data-aos="fade">
+              <div class="col-md-6">
+                <img src="{% static 'Business analytics-amico.svg' %}" alt="Business Analytics" class="img-fluid">
+              </div>
+              <div class="col-md-6">
+                <h1>The Placements Analytics and Dashboard</h1>
+                <p>This is a comprehensive web application designed to store and analyze placement data for students who have secured positions in software companies. The system offers powerful analytical features that enable users to enhance statistical reports and visualizations. A pie chart representation showcases the distribution of placements based on the technologies learned by students, and a comparative analysis of placement trends year by year is presented through bar graphs. Additionally, a pie chart representation of hiring companies illustrates the number of students recruited by each organization, providing valuable insights and industry preferences.</p>
+              </div>
+            </div>
+            <br></br>
+            <div class="row" data-aos="fade">
+              <div class="col-md-6">
+                <h1>Technologies and Opportunities</h1>
+                <p>Nowadays, there are a lot more technologies and opportunities in the software field. In order to get placed in a well-established software company, we need to find out which companies are well-established and which technologies need to be learned that are important. This visualization serves as a guide for students to identify the most sought-after skills in the industry, empowering them to make informed decisions regarding their educational and career paths. Furthermore, the project includes a comparative analysis of placement trends year by year, presented through bar graphs, and a pie chart representation of hiring companies illustrates the number of students recruited by each organization, providing valuable insights and industry preferences.</p>
+              </div>
+              <div class="col-md-6">
+                <img src="{% static 'Data Trends-amico.svg' %}" alt="Data Trends" class="img-fluid">
+              </div>
+            </div>
+            <br></br>
+            <div class="row" data-aos="fade">
+              <div class="col-md-6">
+                <img src="{% static 'Site Stats-amico.svg' %}" alt="Site Stats" class="img-fluid">
+              </div>
+              <div class="col-md-6">
+                <h1>Powerful Analytical Features</h1>
+                <p>The system offers powerful analytical features that enable users to enhance statistical reports and visualizations. A pie chart representation showcases the distribution of placements based on the technologies learned by students. This visualization serves as a guide for students to identify the most sought-after skills in the industry, empowering them to make informed decisions regarding their educational and career paths. Furthermore, the project includes a comparative analysis of placement trends year by year, presented through bar graphs, and a pie chart representation of hiring companies illustrates the number of students recruited by each organization, providing valuable insights and industry preferences.</p>
+              </div>
+            </div>
+            <br></br>
+        </div>
+    </section>
+    <section id="report-section" style="display: none;">Report Section</section>
+    <section id="contact-section" style="display: none;">Contact Section</section>
+    
+    <script>
+      function hideAllSections() {
+        document.getElementById('home-section').style.display = 'none';
+        document.getElementById('dashboard-section').style.display = 'none';
+        document.getElementById('report-section').style.display = 'none';
+        document.getElementById('contact-section').style.display = 'none';
+      }
+
+      document.getElementById('home-icon').addEventListener('click', function() {
+        hideAllSections();
+        document.getElementById('home-section').style.display = 'block';
+      });
+
+      document.getElementById('dashboard-icon').addEventListener('click', function() {
+        hideAllSections();
+        const dashboardSection = document.getElementById('dashboard-section');
+        dashboardSection.style.display = 'block';
+      });
+
+      document.getElementById('report-icon').addEventListener('click', function() {
+        hideAllSections();
+        document.getElementById('report-section').style.display = 'block';
+      });
+
+      document.getElementById('contact-icon').addEventListener('click', function() {
+        console.log('Contact icon clicked!');
+        hideAllSections();
+        document.getElementById('contact-section').style.display = 'block';
+      });
+
+      // Toggle the visibility of the logo based on the sidebar state
+      function toggleLogoVisibility() {
+        const logo = document.querySelector('.logo-img');
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar.classList.contains('expand')) {
+          logo.style.display = 'block';
+        } else {
+          logo.style.display = 'none';
+        }
+      }
+
+      // Set initial visibility state of the logo
+      document.addEventListener('DOMContentLoaded', function() {
+        toggleLogoVisibility();
+      });
+
+      // Add event listener to the menu button
+      const btn_menu = document.querySelector(".btn-menu");
+      const side_bar = document.querySelector(".sidebar");
+      btn_menu.addEventListener("click", function () {
+        side_bar.classList.toggle("expand");
+        changebtn();
+        toggleLogoVisibility(); // Call the function to toggle the logo visibility
+      });
+
+      function changebtn() {
+        if (side_bar.classList.contains("expand")) {
+          btn_menu.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else {
+          btn_menu.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+      }
+    </script>
+    
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+        });
+    </script>
+  </body>
+</html>
